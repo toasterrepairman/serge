@@ -7,6 +7,7 @@ from serge.utils.stream import get_prompt
 from langchain.memory import RedisChatMessageHistory
 from langchain.schema import messages_to_dict, SystemMessage
 from redis import Redis
+import json
 
 from loguru import logger
 
@@ -245,5 +246,6 @@ async def ask_a_question(chat_id: str, prompt: str):
         history.append(SystemMessage(content=error))
         return error
 
-    history.add_ai_message(str(answer['choices'][0]['text']))
+    ansjson = json.loads(answer)
+    history.add_ai_message(str(ansjson['choices'][0]['text']))
     return answer
