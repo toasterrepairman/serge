@@ -245,5 +245,5 @@ async def ask_a_question(chat_id: str, prompt: str):
         history.append(SystemMessage(content=error))
         return error
 
-    history.add_ai_message(answer)
+    history.add_ai_message(str(answer))
     return answer
